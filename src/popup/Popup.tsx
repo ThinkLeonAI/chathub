@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ChatInterface } from '../components/ChatInterface'
 import { Settings } from '../components/Settings'
 import { useAppStore } from '../stores/useAppStore'
-import { Cog6ToothIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline'
+// import { Cog6ToothIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline'
 import toast, { Toaster } from 'react-hot-toast'
 
 export const Popup: React.FC = () => {
@@ -40,7 +40,7 @@ export const Popup: React.FC = () => {
                   : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
               }`}
             >
-              <ChatBubbleLeftRightIcon className="w-4 h-4" />
+              <span>💬</span>
               <span>Chat</span>
             </button>
             
@@ -52,7 +52,7 @@ export const Popup: React.FC = () => {
                   : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
               }`}
             >
-              <Cog6ToothIcon className="w-4 h-4" />
+              <span>⚙️</span>
               <span>Settings</span>
             </button>
           </nav>

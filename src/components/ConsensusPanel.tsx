@@ -1,5 +1,5 @@
 import React from 'react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+// import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ConsensusResult } from '../services/consensus'
 
 interface ConsensusPanelProps {
@@ -18,7 +18,7 @@ export const ConsensusPanel: React.FC<ConsensusPanelProps> = ({ result, onClose 
           onClick={onClose}
           className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
         >
-          <XMarkIcon className="w-5 h-5" />
+          <span>✕</span>
         </button>
       </div>
       

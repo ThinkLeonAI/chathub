@@ -159,7 +159,7 @@ export const useAppStore = create<AppState>()(
       isLoading: false,
       setLoading: (loading) => set({ isLoading: loading }),
       error: null,
-      setError: (error) => set({ error })
+      setError: (error) => set({ error }),
     }),
     {
       name: 'chathub-personal-storage',
@@ -167,8 +167,8 @@ export const useAppStore = create<AppState>()(
         settings: state.settings,
         chatbots: state.chatbots,
         sessions: state.sessions,
-        promptTemplates: state.promptTemplates
-      })
+        promptTemplates: state.promptTemplates,
+      }),
     }
   )
 )

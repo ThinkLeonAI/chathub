@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { PaperAirplaneIcon, MicrophoneIcon } from '@heroicons/react/24/outline'
+// import { PaperAirplaneIcon, MicrophoneIcon } from '@heroicons/react/24/outline'
 import { useAppStore } from '../stores/useAppStore'
 
 interface MessageInputProps {
@@ -89,7 +89,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => 
               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
           }`}
         >
-          <MicrophoneIcon className="w-5 h-5" />
+          <span>🎤</span>
         </button>
       )}
       
@@ -98,7 +98,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({ onSendMessage }) => 
         disabled={!message.trim() || isLoading}
         className="p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
-        <PaperAirplaneIcon className="w-5 h-5" />
+        <span>📤</span>
       </button>
     </form>
   )
