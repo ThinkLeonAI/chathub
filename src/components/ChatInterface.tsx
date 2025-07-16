@@ -30,23 +30,6 @@ export const ChatInterface: React.FC = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [currentSession?.messages])
-
-  // Initialize with selected text from context menu if available
-  useEffect(() => {
-    if (typeof browser !== 'undefined') {
-      browser.storage.local.get(['selectedText', 'selectedTextTimestamp']).then((result) => {
-        if (result.selectedText && result.selectedTextTimestamp) {
-          const timeDiff = Date.now() - result.selectedTextTimestamp
-          if (timeDiff < 60000) { // Within 1 minute
-            handleSendMessage(result.selectedText)
-            browser.storage.local.remove(['selectedText', 'selectedTextTimestamp'])
-          }
-        }
-      }).catch(() => {
-        // Ignore errors in web preview
-      })
-    }
-  }, [])
   
   const handleSendMessage = async (content: string) => {
     if (!content.trim()) return
@@ -136,7 +119,7 @@ export const ChatInterface: React.FC = () => {
   }
   
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-[calc(100vh-80px)]">
       <div className="border-b border-gray-200 dark:border-gray-700 p-4">
         <ChatbotSelector
           selectedChatbots={selectedChatbots}

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { ChatInterface } from '../components/ChatInterface'
-import { Settings } from '../components/Settings'
-import { useAppStore } from '../stores/useAppStore'
+import { ChatInterface } from './components/ChatInterface'
+import { Settings } from './components/Settings'
+import { useAppStore } from './stores/useAppStore'
 import toast, { Toaster } from 'react-hot-toast'
 
-export const Popup: React.FC = () => {
+export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'chat' | 'settings'>('chat')
   const { settings } = useAppStore()
   
@@ -20,12 +20,12 @@ export const Popup: React.FC = () => {
   }, [settings.theme])
   
   return (
-    <div className="w-[800px] h-[600px] bg-white dark:bg-gray-900 flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
       <Toaster position="top-right" />
       
       {/* Header */}
       <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between max-w-6xl mx-auto">
           <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
             ChatHub Personal
           </h1>
@@ -59,7 +59,7 @@ export const Popup: React.FC = () => {
       </header>
       
       {/* Content */}
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 max-w-6xl mx-auto w-full">
         {activeTab === 'chat' ? <ChatInterface /> : <Settings />}
       </main>
     </div>
