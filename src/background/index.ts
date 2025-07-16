@@ -1,50 +1,42 @@
-import Browser from 'webextension-polyfill'
-import { ALL_IN_ONE_PAGE_ID } from '~app/consts'
-import { getUserConfig } from '~services/user-config'
-import { trackInstallSource } from './source'
-import { readTwitterCsrfToken } from './twitter-cookie'
+import browser from 'webextension-polyfill'
 
-// expose storage.session to content scripts
-// using `chrome.*` API because `setAccessLevel` is not supported by `Browser.*` API
-chrome.storage.session.setAccessLevel({ accessLevel: 'TRUSTED_AND_UNTRUSTED_CONTEXTS' })
-
-async function openAppPage() {
-  const tabs = await Browser.tabs.query({})
-  const url = Browser.runtime.getURL('app.html')
-  const tab = tabs.find((tab) => tab.url?.startsWith(url))
-  if (tab) {
-    await Browser.tabs.update(tab.id, { active: true })
-    return
-  }
-  const { startupPage } = await getUserConfig()
-  const hash = startupPage === ALL_IN_ONE_PAGE_ID ? '' : `#/chat/${startupPage}`
-  await Browser.tabs.create({ url: `app.html${hash}` })
-}
-
-Browser.action.onClicked.addListener(() => {
-  openAppPage()
+// Handle extension installation
+browser.runtime.onInstalled.addListener(() => {
+  console.log('ChatHub Personal installed')
 })
 
-Browser.runtime.onInstalled.addListener((details) => {
-  if (details.reason === 'install') {
-    Browser.tabs.create({ url: 'app.html#/setting' })
-    trackInstallSource()
+// Handle keyboard shortcut
+browser.commands.onCommand.addListener((command) => {
+  if (command === 'open-popup') {
+    browser.action.openPopup()
   }
 })
 
-Browser.commands.onCommand.addListener(async (command) => {
-  console.debug(`Command: ${command}`)
-  if (command === 'open-app') {
-    openAppPage()
+// Handle context menu for selected text
+browser.contextMenus.create({
+  id: 'chathub-selected-text',
+  title: 'Ask ChatHub about "%s"',
+  contexts: ['selection']
+})
+
+browser.contextMenus.onClicked.addListener((info, tab) => {
+  if (info.menuItemId === 'chathub-selected-text' && info.selectionText) {
+    // Store selected text for popup to use
+    browser.storage.local.set({
+      selectedText: info.selectionText,
+      selectedTextTimestamp: Date.now()
+    })
+    
+    // Open popup
+    browser.action.openPopup()
   }
 })
 
-Browser.runtime.onMessage.addListener(async (message, sender) => {
-  console.debug('onMessage', message, sender)
-  if (message.target !== 'background') {
-    return
-  }
-  if (message.type === 'read-twitter-csrf-token') {
-    return readTwitterCsrfToken(message.data)
-  }
-})
+// Clean up old selected text
+setInterval(() => {
+  browser.storage.local.get(['selectedTextTimestamp']).then((result) => {
+    if (result.selectedTextTimestamp && Date.now() - result.selectedTextTimestamp > 60000) {
+      browser.storage.local.remove(['selectedText', 'selectedTextTimestamp'])
+    }
+  })
+}, 30000)

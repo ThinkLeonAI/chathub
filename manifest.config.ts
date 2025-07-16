@@ -3,81 +3,49 @@ import { defineManifest } from '@crxjs/vite-plugin'
 export default defineManifest(async () => {
   return {
     manifest_version: 3,
-    name: '__MSG_appName__',
-    description: '__MSG_appDesc__',
-    default_locale: 'en',
-    version: '1.45.7',
+    name: 'ChatHub Personal',
+    description: 'Personal AI chatbot extension for ChatGPT, Grok, Gemini, and Claude',
+    version: '1.0.0',
     icons: {
-      '16': 'src/assets/icon.png',
-      '32': 'src/assets/icon.png',
-      '48': 'src/assets/icon.png',
-      '128': 'src/assets/icon.png',
+      '16': 'src/assets/icon-16.png',
+      '32': 'src/assets/icon-32.png',
+      '48': 'src/assets/icon-48.png',
+      '128': 'src/assets/icon-128.png',
     },
     background: {
       service_worker: 'src/background/index.ts',
       type: 'module',
     },
-    action: {},
-    host_permissions: [
-      'https://*.bing.com/',
-      'https://*.openai.com/',
-      'https://bard.google.com/',
-      'https://*.chathub.gg/',
-      'https://*.duckduckgo.com/',
-      'https://*.poe.com/',
-      'https://*.anthropic.com/',
-      'https://*.claude.ai/',
+    action: {
+      default_popup: 'popup.html',
+      default_title: 'ChatHub Personal'
+    },
+    permissions: [
+      'storage',
+      'activeTab',
+      'scripting'
     ],
-    optional_host_permissions: ['https://*/*', 'wss://*/*'],
-    permissions: ['storage', 'unlimitedStorage', 'sidePanel', 'declarativeNetRequestWithHostAccess', 'scripting'],
-    content_scripts: [
-      {
-        matches: ['https://chat.openai.com/*'],
-        js: ['src/content-script/chatgpt-inpage-proxy.ts'],
-      },
+    host_permissions: [
+      'https://api.openai.com/*',
+      'https://api.x.ai/*',
+      'https://generativelanguage.googleapis.com/*',
+      'https://api.anthropic.com/*',
+      'https://chat.openai.com/*',
+      'https://grok.x.ai/*',
+      'https://gemini.google.com/*',
+      'https://claude.ai/*'
     ],
     commands: {
-      'open-app': {
+      'open-popup': {
         suggested_key: {
-          default: 'Alt+J',
-          windows: 'Alt+J',
-          linux: 'Alt+J',
-          mac: 'Command+J',
+          default: 'Ctrl+Shift+C',
+          mac: 'Command+Shift+C'
         },
-        description: 'Open ChatHub app',
-      },
+        description: 'Open ChatHub Personal'
+      }
     },
-    side_panel: {
-      default_path: 'sidepanel.html',
-    },
-    declarative_net_request: {
-      rule_resources: [
-        {
-          id: 'ruleset_bing',
-          enabled: true,
-          path: 'src/rules/bing.json',
-        },
-        {
-          id: 'ruleset_ddg',
-          enabled: true,
-          path: 'src/rules/ddg.json',
-        },
-        {
-          id: 'ruleset_qianwen',
-          enabled: true,
-          path: 'src/rules/qianwen.json',
-        },
-        {
-          id: 'ruleset_baichuan',
-          enabled: true,
-          path: 'src/rules/baichuan.json',
-        },
-        {
-          id: 'ruleset_pplx',
-          enabled: true,
-          path: 'src/rules/pplx.json',
-        },
-      ],
-    },
+    content_security_policy: {
+      extension_pages: "script-src 'self'; object-src 'self'"
+    }
   }
 })

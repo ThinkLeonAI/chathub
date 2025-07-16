@@ -1,63 +1,192 @@
-<p align="center">
-    <img src="./src/assets/icon.png" width="150">
-</p>
+# ChatHub Personal
 
-<h1 align="center">ChatHub</h1>
+A customized, independent browser extension for personal use with ChatGPT, Grok, Gemini, and Claude.
 
-<div align="center">
+## Features
 
-### Install
+- **Multi-Chatbot Interface**: Chat with multiple AI models simultaneously
+- **API & Web Modes**: Use official APIs or web interfaces for each chatbot
+- **Consensus Analysis**: Compare and analyze responses from multiple chatbots
+- **Privacy-First**: All data stored locally, no external tracking
+- **Modern UI**: Dark/light themes, responsive layouts, voice input/output
+- **Prompt Management**: Built-in prompt library with import/export
+- **Keyboard Shortcuts**: Quick access via Ctrl+Shift+C
 
-<a href="https://chrome.google.com/webstore/detail/chathub-all-in-one-chatbo/iaakpnchhognanibcahlpcplchdfmgma?utm_source=github"><img src="https://user-images.githubusercontent.com/64502893/231991498-8df6dd63-727c-41d0-916f-c90c15127de3.png" width="200" alt="Get ChatHub for Chromium"></a>
+## Supported Chatbots
 
-</div>
+1. **ChatGPT** (OpenAI)
+   - API: Requires OpenAI API key
+   - Web: Uses chat.openai.com
 
-## 📷 Screenshot
+2. **Grok** (xAI)
+   - API: Requires xAI API key from https://x.ai/api
+   - Web: Uses grok.x.ai
 
-![Screenshot](screenshots/extension.png?raw=true)
+3. **Gemini** (Google)
+   - API: Requires Google AI API key
+   - Web: Uses gemini.google.com
 
-## 🤝 Sponsors
+4. **Claude** (Anthropic)
+   - API: Requires Anthropic API key
+   - Web: Uses claude.ai
 
-<a href="https://getstream.io/chat/sdk/react/?utm_source=github&utm_medium=referral&utm_content=&utm_campaign=wong2">
-  <img src="screenshots/stream-logo.jpg" width="200" />
-</a>
+## Installation
 
-## ✨ Features
+1. Clone this repository
+2. Install dependencies:
+   ```bash
+   yarn install
+   ```
 
-- 🤖 Use different chatbots in one app, currently supporting ChatGPT, new Bing Chat, Google Bard, Claude, and open-source models including LLama2, Vicuna, ChatGLM etc
-- 💬 Chat with multiple chatbots at the same time, making it easy to compare their answers
-- 🚀 Support ChatGPT API and GPT-4 Browsing
-- 🔍 Shortcut to quickly activate the app anywhere in the browser
-- 🎨 Markdown and code highlight support
-- 📚 Prompt Library for custom prompts and community prompts
-- 💾 Conversation history saved locally
-- 📥 Export and Import all your data
-- 🔗 Share conversation to markdown
-- 🌙 Dark mode
-- 🌐 Web access
+3. Build the extension:
+   ```bash
+   yarn build
+   ```
 
-## 🤖 Supported Bots
+4. Load in Chrome:
+   - Open Chrome and go to `chrome://extensions/`
+   - Enable "Developer mode"
+   - Click "Load unpacked" and select the `dist` folder
 
-- ChatGPT (via Webapp/API/Azure/Poe)
-- Bing Chat
-- Google Bard
-- Claude 2 (via Webapp/API/Poe)
-- LLaMA 2
-- ChatGLM
-- Pi by Inflection
-- Vicuna
-- WizardLM
-- iFlytek Spark
-- Tongyi Qianwen
-- Baichuan
-- ...
+## Configuration
 
-## 🔨 Build from Source
+1. Click the extension icon or use Ctrl+Shift+C
+2. Go to Settings tab
+3. Configure each chatbot:
+   - Enable/disable chatbots
+   - Choose API or Web mode
+   - Enter API keys for API mode
+   - Test API key validity
 
-- Clone the source code
-- `corepack enable`
-- `yarn install`
-- `yarn build`
-- In Chrome/Edge go to the Extensions page (chrome://extensions or edge://extensions)
-- Enable Developer Mode
-- Drag the `dist` folder anywhere on the page to import it (do not delete the folder afterward)
+## API Keys Setup
+
+### ChatGPT (OpenAI)
+1. Visit https://platform.openai.com/api-keys
+2. Create a new API key
+3. Copy and paste into ChatHub settings
+
+### Grok (xAI)
+1. Visit https://x.ai/api
+2. Sign up and create an API key
+3. Copy and paste into ChatHub settings
+
+### Gemini (Google)
+1. Visit https://makersuite.google.com/app/apikey
+2. Create a new API key
+3. Copy and paste into ChatHub settings
+
+### Claude (Anthropic)
+1. Visit https://console.anthropic.com/
+2. Create an API key
+3. Copy and paste into ChatHub settings
+
+## Usage
+
+### Basic Chat
+1. Open the extension popup
+2. Select which chatbots to use
+3. Type your message and press Enter
+4. View responses in grid, stacked, or carousel layout
+
+### Consensus Mode
+1. Enable "Consensus Mode" in settings
+2. Send a message to multiple chatbots
+3. View analysis of common points and differences
+
+### Voice Features
+1. Enable voice input/output in settings
+2. Click microphone icon to speak your message
+3. Responses can be read aloud (if voice output enabled)
+
+### Context Menu
+1. Select text on any webpage
+2. Right-click and choose "Ask ChatHub about..."
+3. Extension opens with selected text as prompt
+
+## Data Management
+
+### Export Data
+- Click "Export Data" in settings
+- Downloads JSON file with all chats and settings
+
+### Import Data
+- Click "Import Data" in settings
+- Select previously exported JSON file
+
+### Clear Data
+- Click "Clear All Data" to reset everything
+- This action cannot be undone
+
+## Privacy & Security
+
+- All data stored locally in browser
+- No external tracking or analytics
+- API keys encrypted in local storage
+- No data sent to third parties except chosen AI services
+
+## Development
+
+### Project Structure
+```
+src/
+├── components/          # React components
+├── services/           # API integrations and business logic
+├── stores/             # Zustand state management
+├── types/              # TypeScript type definitions
+├── popup/              # Extension popup interface
+└── background/         # Background script
+```
+
+### Available Scripts
+- `yarn dev` - Development mode with hot reload
+- `yarn build` - Production build
+- `yarn test` - Run tests
+- `yarn lint` - Code linting
+
+### Testing
+```bash
+yarn test
+```
+
+## Troubleshooting
+
+### API Key Issues
+- Verify API key is correct and has sufficient credits
+- Check API key permissions and rate limits
+- Use "Test" button in settings to validate
+
+### Extension Not Loading
+- Ensure all dependencies are installed
+- Check browser console for errors
+- Try rebuilding with `yarn build`
+
+### Web Mode Issues
+- Ensure you're logged into the respective AI service websites
+- Check browser permissions for the extension
+- Clear browser cache if needed
+
+## Version History
+
+### v1.0.0-personal
+- Initial release
+- Support for ChatGPT, Grok, Gemini, Claude
+- API and web modes
+- Consensus analysis
+- Voice input/output
+- Local data storage
+
+## License
+
+This is a personal-use modification of the original ChatHub project. For personal use only.
+
+## Support
+
+This is a personal project. For issues:
+1. Check the troubleshooting section
+2. Verify API keys and configurations
+3. Check browser console for errors
+4. Try rebuilding the extension
+
+## Contributing
+
+This is a personal fork. Feel free to create your own fork and customize further for your needs.
