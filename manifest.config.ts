@@ -7,10 +7,10 @@ export default defineManifest(async () => {
     description: 'Personal AI chatbot extension for ChatGPT, Grok, Gemini, and Claude',
     version: '1.0.0',
     icons: {
-      '16': 'src/assets/icon-16.png',
-      '32': 'src/assets/icon-32.png',
-      '48': 'src/assets/icon-48.png',
-      '128': 'src/assets/icon-128.png',
+      '16': 'src/assets/icon.png',
+      '32': 'src/assets/icon.png',
+      '48': 'src/assets/icon.png',
+      '128': 'src/assets/icon.png',
     },
     background: {
       service_worker: 'src/background/index.ts',
