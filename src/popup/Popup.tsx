@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { ChatInterface } from '../components/ChatInterface'
 import { Settings } from '../components/Settings'
 import { useAppStore } from '../stores/useAppStore'
-// import { Cog6ToothIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline'
 import toast, { Toaster } from 'react-hot-toast'
 
 export const Popup: React.FC = () => {

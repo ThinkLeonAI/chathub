@@ -32,11 +32,13 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@tailwindcss/typography": "^0.5.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-markdown": "^8.0.7",
     "react-syntax-highlighter": "^15.5.0",
+    "@types/react-syntax-highlighter": "^15.5.11",
     "uuid": "^9.0.1",
     "webextension-polyfill": "^0.10.0",
     "zustand": "^4.4.7"
